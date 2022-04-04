@@ -1,42 +1,43 @@
+import React, { useState , useEffect } from 'react';
 import "./App.css";
-import logo from "./logo.png";
+import { Home } from './frontend/templates/pages'; 
+import { Navbar , Footer } from "./frontend/templates/components";
+import { BrowserRouter , Routes , Route } from 'react-router-dom';
+import { getCategories } from './frontend/services/categoryService';
+import { getFeaturedProducts, getProducts } from './frontend/services/productsService';
 
 function App() {
+
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let responseCategories = await getCategories();
+        setCategories(responseCategories.actionResponse.data.categories);
+        let responseProducts = await getProducts();
+        let featuredProducts = getFeaturedProducts(responseProducts.actionResponse.data.products);
+        setFeaturedProducts(featuredProducts);
+      } 
+      catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [categories,featuredProducts]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>mockBee!</span>
-        </h1>
-        <p className="brand-description">
-          Get started by editing <code>src/App.js</code>
-        </p>
-        <div className="links">
-          <a
-            href="https://mockbee.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Explore mockBee
-          </a>
-          <a
-            href="https://mockbee.netlify.app/docs/api/introduction"
-            target="_blank"
-            rel="noreferrer"
-          >
-            API Documentation
-          </a>
-          <a
-            href="https://github.com/neogcamp/mockBee"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
+   <>
+      <div className="grid-container">     
+    <BrowserRouter>   
+        <Navbar/>
+            <Routes>
+                <Route path="/" element={<Home categories={categories} products={featuredProducts} />}/>
+            </Routes>
+        <Footer/>
+    </BrowserRouter>
     </div>
+   </>
   );
 }
 
