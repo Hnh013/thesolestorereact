@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import '../../styles/components/navbar.css';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
+import { useUser } from '../../contexts/userContext';
+import { toastSuccess } from '../../services/toastService';
 
 export const Navbar = () => {
+  const { userState , userDispatcher } = useUser();
+  const navigate = useNavigate();
+
+  const logoutUser = async (e) => {
+      userDispatcher({ type: 'logout'});
+      toastSuccess('You have Logged Out!');
+      navigate('/login');
+  }
+
 
     const [navlinksClass, setNavlinksClass] = useState('nav-links');
     const [navSearchClass, setSearchClass] = useState('nav-g-search');
@@ -50,21 +61,24 @@ export const Navbar = () => {
             <span>
               <span className="f-2x material-icons">favorite_border</span>
             </span>
-           <span className="badge badge-md num-blip-md num-blip num-blip-fire">
-              0
-            </span> 
+            { userState.foundUser && <span className="badge badge-md num-blip-md num-blip num-blip-fire">
+              { userState.foundUser.wishlist.length }
+            </span> }
           </span>
           <span className="pos-rel">
             <span>
               <span className="f-2x material-icons">shopping_cart</span>
             </span>
-            <span className="badge badge-md num-blip-md num-blip num-blip-fire">
-             0
-            </span>
+            { userState.foundUser && <span className="badge badge-md num-blip-md num-blip num-blip-fire">
+              { userState.foundUser.cart.length }
+              </span> }
           </span>
-          <span>
+          { userState.foundUser ? (<span onClick={logoutUser}>
+            <span className="f-2x material-icons">logout</span>
+          </span>) : (<Link to='/login'>
             <span className="f-2x material-icons">login</span>
-          </span> 
+          </Link> )
+           }
         </div>
       </div>
     </nav>
