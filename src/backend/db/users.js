@@ -12,8 +12,8 @@ export const users = [
     firstName: "Adarsh",
     lastName: "Balika",
     email: "adarshbalika@gmail.com",
-    password: "adarshbalika",
+    password: "Adarshbalika@123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-  },
+  }
 ];
