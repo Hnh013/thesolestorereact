@@ -23,7 +23,6 @@ export const Login = () => {
     let response;
     try {
         response = await loginAction(credentials);
-        console.log(response);
         if (response.actionSuccess) {
             let { foundUser , encodedToken } = response.actionResponse.data;
             toastSuccess('You have Succesfully Logged In!');
