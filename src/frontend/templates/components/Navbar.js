@@ -8,7 +8,7 @@ export const Navbar = () => {
   const { userState , userDispatcher } = useUser();
   const navigate = useNavigate();
 
-  const logoutUser = async (e) => {
+  const logoutUser = async () => {
       userDispatcher({ type: 'logout'});
       toastSuccess('You have Logged Out!');
       navigate('/login');
@@ -18,7 +18,7 @@ export const Navbar = () => {
     const [navlinksClass, setNavlinksClass] = useState('nav-links');
     const [navSearchClass, setSearchClass] = useState('nav-g-search');
 
-    const toggleNavBar = (e) => {
+    const toggleNavBar = () => {
         navlinksClass === 'nav-links'
           ? setNavlinksClass('nav-links-responsive')
           : setNavlinksClass('nav-links');
