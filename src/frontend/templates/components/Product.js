@@ -37,7 +37,6 @@ export const Product = (props) => {
     return (
         
         <div className="card v-crd mx-auto bg-smoke bdr-rad-sm">
-            { String(props.product.inWishlist) }
         <div className="v-crd-hdr px-xs py-xs pos-rel">
             <img src={ props.product.imagePath } alt={ props.product.itemName } className="img-square bdr-rad-sm"/>
             { props.product.inWishlist ? 
