@@ -43,7 +43,7 @@ export const Footer = () => {
          { userState.foundUser ?
         (<Link to='/cart'><span className='f-w-800 txt-over'>Cart</span></Link>)
         :
-        (<Link to='/login'><span className='f-w-800 txt-over'>Wishlist </span></Link>)
+        (<Link to='/login'><span className='f-w-800 txt-over'>Cart </span></Link>)
         }
         </div>
         </div>
