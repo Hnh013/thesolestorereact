@@ -32,7 +32,7 @@ export const Footer = () => {
         </div>
         <div className='footer-right d-flex fd-col py-sm'>
         <Link to='/'><span className='f-w-800 txt-calm'>Home</span></Link>
-        <span><span className='f-w-800 txt-over'>Products </span></span>
+        <Link to='/products'><span className='f-w-800 txt-over'>Products </span></Link>
         <span><span className='f-w-800 txt-over'>Wishlist</span></span>
         <span><span className='f-w-800 txt-over'>Cart</span></span>
         </div>

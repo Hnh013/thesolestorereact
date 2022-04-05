@@ -1,4 +1,6 @@
 import React, { useRef} from 'react';
+import { Link , useNavigate } from 'react-router-dom';
+import { useData } from '../../contexts/dataContext';
 import '../../styles/pages/home.css';
 import { Category , Featured } from "../components";
 
@@ -9,6 +11,18 @@ export const Home = (props) => {
     const scroll = (scrollOffset) => {
     category.current.scrollLeft += scrollOffset;
     }
+    const navigate = useNavigate();
+    const { filtersDispatcher , filtersState } = useData();
+    const categoryProducts = (categoryName) => {
+        const selectedCategory = categoryName.toLowerCase();
+        filtersDispatcher({ type: 'category', payload: { ...filtersState.category , [selectedCategory] : true } });
+        navigate('/products');
+    }
+
+    const featuredProducts = () => {
+        filtersDispatcher({ type: 'featured', payload: true })
+        navigate('/products');
+    }
 
     return (
         <main className='main-home'>
@@ -18,7 +32,7 @@ export const Home = (props) => {
                 </div>
                 <div className='d-flex fw-wrap ai-c jc-sa gap-1 py-sm px-sm'>
                     {categories.map((categoryObj,index) => 
-                    <Category key={index} categoryObj={categoryObj} /> )}
+                    <Category key={index} categoryObj={categoryObj} categoryProducts={categoryProducts} /> )}
                 </div>
             </section>
             <section className="banner-container">
@@ -27,8 +41,10 @@ export const Home = (props) => {
                 </div>
                 <div className="banner-overlay-div"></div>
                 <div className="banner-text-div d-flex ai-c jc-c">       
+                    <Link to='/products'>
                     <button
                     className='btn btn-calm bdr-rad-sm'>Shop Now</button>
+                    </Link>
                 </div>
             </section>
             <section>
@@ -42,7 +58,7 @@ export const Home = (props) => {
                         </button>
                     </div>
                     <div ref={category} className="row-category d-flex ai-c gap-1 hide-scrollbar">
-                        {products.map((product,index) => <Featured key={index} product={product}/> )}   
+                        {products.map((product,index) => <Featured key={index} product={product} featuredProducts={featuredProducts} /> )}   
                     </div>
                     <div className="d-flex ai-c">
                         <button onClick={() => scroll(+200)} className="material-icons arrow-right btn-fab btn-over">

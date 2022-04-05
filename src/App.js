@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import "./App.css";
-import { Home , Login , Signup } from './frontend/templates/pages'; 
+import { Home , Login , Signup, Products } from './frontend/templates/pages'; 
 import { Navbar , Footer } from "./frontend/templates/components";
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
 import { getCategories } from './frontend/services/categoryService';
@@ -14,19 +14,15 @@ function App() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      try {
+    const getData = async () => { 
         let responseCategories = await getCategories();
         setCategories(responseCategories.actionResponse.data.categories);
         let responseProducts = await getProducts();
         let featuredProducts = getFeaturedProducts(responseProducts.actionResponse.data.products);
         setFeaturedProducts(featuredProducts);
-      } 
-      catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [categories,featuredProducts]);
+  }
+  getData();
+}, []);
 
   return (
   <>
@@ -48,6 +44,7 @@ function App() {
                   <Route path="/" element={<Home categories={categories} products={featuredProducts} />}/>
                   <Route path="/login" element={<Login/>}/>
                   <Route path="/signup" element={<Signup/>}/>
+                  <Route path="/products" element={<Products/>}/>
               </Routes>
           <Footer/>
       </BrowserRouter>

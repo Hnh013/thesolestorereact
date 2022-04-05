@@ -6,7 +6,7 @@ const signupFormInputs = [
       placeholder: "Firstname",
       errormessage: "It should be a valid first name!",
       label: "Firstname",
-      pattern:'^[a-zA-Z\s]+$',
+      pattern:'^[a-zA-Z]+$',
       required: true,
     },
     {
@@ -16,7 +16,7 @@ const signupFormInputs = [
       placeholder: "Lastname",
       errormessage: "It should be a valid last name!",
       label: "Lastname",
-      pattern:'^[a-zA-Z\s]+$',
+      pattern:'^[a-zA-Z]+$',
       required: true,
     },
     {
