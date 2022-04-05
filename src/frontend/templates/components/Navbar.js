@@ -79,9 +79,20 @@ export const Navbar = () => {
             </span> }
           </span>
           <span className="pos-rel">
+          {
+           userState.foundUser ?
+          (<Link to='/cart'>
             <span>
               <span className="f-2x material-icons">shopping_cart</span>
             </span>
+          </Link>)
+            :
+          (<Link to='/login'>
+            <span>
+              <span className="f-2x material-icons">shopping_cart</span>
+            </span>
+          </Link>)
+          }
             { userState.foundUser && <span className="badge badge-md num-blip-md num-blip num-blip-fire">
               { userState.foundUser.cart.length }
               </span> }

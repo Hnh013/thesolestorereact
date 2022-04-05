@@ -40,7 +40,11 @@ export const Footer = () => {
         :
         (<Link to='/login'><span className='f-w-800 txt-over'>Wishlist </span></Link>)
         }
-        <span><span className='f-w-800 txt-over'>Cart</span></span>
+         { userState.foundUser ?
+        (<Link to='/cart'><span className='f-w-800 txt-over'>Cart</span></Link>)
+        :
+        (<Link to='/login'><span className='f-w-800 txt-over'>Wishlist </span></Link>)
+        }
         </div>
         </div>
     </footer>

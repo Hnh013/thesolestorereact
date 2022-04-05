@@ -7,7 +7,7 @@ const productInCartWishlistChecker = ( userObjectArray , productsArray , objectA
                 if ( userObjectArray[i]._id === customArray[j]._id ) { 
                     if( objectArrayName === 'cart') {
                         customArray[j].inCart = true;
-                    }
+                    } 
                     if( objectArrayName === 'wishlist' ) {
                         customArray[j].inWishlist = true;
                     }

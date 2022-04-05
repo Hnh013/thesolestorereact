@@ -5,7 +5,7 @@ import { Product } from '../components';
 
 export const Wishlist = () => {
     const { userState } = useUser();
-    
+
     return (
         <main className="main px-xs py-xs d-flex fd-col gap-1">
             <div className="px-sm d-flex jc-c ai-c">
@@ -15,7 +15,7 @@ export const Wishlist = () => {
             </div>
             <div className="d-flex fw-wrap jc-c gap-1 pb-md">
                 { userState.foundUser &&                
-                 <> { userState.foundUser.wishlist.map( (product,index) => <Product product={product} key={index} />)} </>
+                 <> { userState.foundUser.wishlist.map((product,index) => <Product fromCart={false} product={product} key={index} />)} </>
                 }
             </div>
         </main>
