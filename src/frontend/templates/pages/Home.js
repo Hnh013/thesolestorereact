@@ -1,18 +1,19 @@
-import React, { useRef} from 'react';
+import React, { useRef , useState, useEffect} from 'react';
 import { Link , useNavigate } from 'react-router-dom';
 import { useData } from '../../contexts/dataContext';
 import '../../styles/pages/home.css';
 import { Category , Featured } from "../components";
+import { getCategories } from '../../services/categoryService';
+import { getFeaturedProducts } from '../../services/productsService';   
 
-export const Home = (props) => {
+export const Home = () => {
     const category = useRef(null);
-    const categories = props.categories;
-    const products = props.products;
+
     const scroll = (scrollOffset) => {
     category.current.scrollLeft += scrollOffset;
     }
     const navigate = useNavigate();
-    const { filtersDispatcher , filtersState } = useData();
+    const { filtersDispatcher , filtersState , filteredProducts } = useData();
     const categoryProducts = (categoryName) => {
         const selectedCategory = categoryName.toLowerCase();
         filtersDispatcher({ type: 'category', payload: { ...filtersState.category , [selectedCategory] : true } });
@@ -23,6 +24,19 @@ export const Home = (props) => {
         filtersDispatcher({ type: 'featured', payload: true })
         navigate('/products');
     }
+
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+  
+    useEffect(() => {
+      const getData = async () => { 
+          let responseCategories = await getCategories();
+          setCategories(responseCategories.actionResponse.data.categories);
+          let featuredProducts = getFeaturedProducts(filteredProducts);
+          setProducts(featuredProducts);
+    }
+    getData();
+  });
 
     return (
         <main className='main-home'>

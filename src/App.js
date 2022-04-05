@@ -1,28 +1,12 @@
-import React, { useState , useEffect } from 'react';
+import React from 'react';
 import "./App.css";
-import { Home , Login , Signup, Products } from './frontend/templates/pages'; 
+import { Home , Login , Signup, Products, Wishlist } from './frontend/templates/pages'; 
 import { Navbar , Footer } from "./frontend/templates/components";
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
-import { getCategories } from './frontend/services/categoryService';
-import { getFeaturedProducts, getProducts } from './frontend/services/productsService';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => { 
-        let responseCategories = await getCategories();
-        setCategories(responseCategories.actionResponse.data.categories);
-        let responseProducts = await getProducts();
-        let featuredProducts = getFeaturedProducts(responseProducts.actionResponse.data.products);
-        setFeaturedProducts(featuredProducts);
-  }
-  getData();
-}, []);
 
   return (
   <>
@@ -41,10 +25,11 @@ function App() {
       <BrowserRouter>   
           <Navbar/>
               <Routes>
-                  <Route path="/" element={<Home categories={categories} products={featuredProducts} />}/>
+                  <Route path="/" element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
                   <Route path="/signup" element={<Signup/>}/>
                   <Route path="/products" element={<Products/>}/>
+                  <Route path="/wishlist" element={<Wishlist/>}/>
               </Routes>
           <Footer/>
       </BrowserRouter>

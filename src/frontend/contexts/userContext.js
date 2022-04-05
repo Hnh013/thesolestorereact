@@ -12,6 +12,10 @@ const UserProvider = ({children}) => {
                 return { ...state, ...action.payload };
             case 'logout':
                 return { ...state , ...user };
+            case 'addItemToWishlist':
+                return { ...state , foundUser : action.payload };
+            case 'removeItemFromWishlist':
+                return { ...state , foundUser : action.payload };
             default:
                 return { ...state};
         }

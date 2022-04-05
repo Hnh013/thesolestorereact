@@ -13,7 +13,7 @@ export const Products = () => {
         asideClass === 'bg-smoke aside o-09'
           ? setAsideClass('bg-smoke aside o-09 responsive')
           : setAsideClass('bg-smoke aside o-09');
-    };
+    };  
 
     return (
         <main className='main-grid'>

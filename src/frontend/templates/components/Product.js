@@ -1,11 +1,51 @@
 import React from "react";
+import { useUser } from "../../contexts/userContext";
+import { toastSuccess , toastError } from '../../services/toastService';
+import { addItemToWishlist , removeItemFromWishlist } from '../../services/wishlistService';
 
 export const Product = (props) => {
+
+    const { userState , userDispatcher } = useUser();
+
+    const ATW = async (myToken , productDetails) => {
+        const wishlistProduct = { ...productDetails , inWishlist: true };
+        const response = await addItemToWishlist(myToken , wishlistProduct);
+        if(response.actionSuccess) {
+            toastSuccess('Item Added to Wishlist!');
+            userDispatcher({ 
+            type: 'addItemToWishlist' , 
+            payload : { ...userState.foundUser , wishlist : [ ...userState.foundUser.wishlist , {...wishlistProduct }]}   
+            });
+        } else {
+            toastError('Please Log In First!');
+        }
+    }
+
+    const RFW = async (myToken, productDetails) => {
+        const response = await removeItemFromWishlist(myToken , productDetails._id);
+        if(response.actionSuccess) {
+            toastSuccess('Item Removed from Wishlist!');
+            userDispatcher({ 
+            type: 'removeItemFromWishlist' , 
+            payload : { ...userState.foundUser , wishlist : userState.foundUser.wishlist.filter(product => product._id !== productDetails._id)}   
+        });
+        } else {
+            toastError('Oops! Something went wrong');
+        }
+    }
+
     return (
+        
         <div className="card v-crd mx-auto bg-smoke bdr-rad-sm">
         <div className="v-crd-hdr px-xs py-xs pos-rel">
             <img src={ props.product.imagePath } alt={ props.product.itemName } className="img-square bdr-rad-sm"/>
-            <span className=" pos-abs top-rgt-5 material-icons bdr-rad-f px-xs py-xs txt-metal">favorite_border</span>
+            { props.product.inWishlist ? 
+            (<span onClick={() => RFW( userState.encodedToken , props.product )} 
+                className=" pos-abs top-rgt-5 material-icons bdr-rad-f px-xs py-xs txt-fire">favorite</span>)
+            :
+            (<span onClick={() => ATW( userState.encodedToken , props.product )}
+                className=" pos-abs top-rgt-5 material-icons bdr-rad-f px-xs py-xs txt-metal">favorite_border</span>)
+            }
         </div>
         <div className="v-crd-ctnt ta-c px-xs">
             <div className="d-flex fd-col">
