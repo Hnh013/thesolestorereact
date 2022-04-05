@@ -1,8 +1,10 @@
 import React from 'react';
 import '../../styles/components/footer.css';
 import { Link } from 'react-router-dom';
+import { useUser } from '../../contexts/userContext';
 
 export const Footer = () => {
+  const { userState } = useUser();
 
     return (
         <footer className="footer">
@@ -33,7 +35,11 @@ export const Footer = () => {
         <div className='footer-right d-flex fd-col py-sm'>
         <Link to='/'><span className='f-w-800 txt-calm'>Home</span></Link>
         <Link to='/products'><span className='f-w-800 txt-over'>Products </span></Link>
-        <span><span className='f-w-800 txt-over'>Wishlist</span></span>
+        { userState.foundUser ?
+        (<Link to='/wishlist'><span className='f-w-800 txt-over'>Wishlist</span></Link>)
+        :
+        (<Link to='/login'><span className='f-w-800 txt-over'>Wishlist </span></Link>)
+        }
         <span><span className='f-w-800 txt-over'>Cart</span></span>
         </div>
         </div>
