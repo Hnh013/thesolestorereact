@@ -24,8 +24,8 @@ export const Login = () => {
     try {
         response = await loginAction(credentials);
         if (response.actionSuccess) {
-            let { foundUser , encodedToken } = response.actionResponse.data;
             toastSuccess('You have Succesfully Logged In!');
+            let { foundUser , encodedToken } = response.actionResponse.data;
             userDispatcher({ type: 'login' , payload : { foundUser , encodedToken }});
             navigate('/');
         } else {

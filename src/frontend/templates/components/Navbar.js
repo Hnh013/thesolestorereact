@@ -8,9 +8,9 @@ export const Navbar = () => {
   const { userState , userDispatcher } = useUser();
   const navigate = useNavigate();
 
-  const logoutUser = async () => {
+  const logoutUser = () => {
+      toastSuccess('You have Logged Out!');  
       userDispatcher({ type: 'logout'});
-      toastSuccess('You have Logged Out!');
       navigate('/login');
   }
 
@@ -54,9 +54,11 @@ export const Navbar = () => {
           <span className="f-2x material-icons">search</span>
         </div>
         <div className={navlinksClass}>
+          <Link to='/products'>
           <span>
             <span className="f-2x material-icons">view_list</span>
           </span>
+          </Link>
           <span className="pos-rel">
             <span>
               <span className="f-2x material-icons">favorite_border</span>

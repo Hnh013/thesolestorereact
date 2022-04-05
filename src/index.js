@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { UserProvider } from "./frontend/contexts/userContext";
+import { DataProvider } from "./frontend/contexts/dataContext";
 
 // Call make Server
 makeServer();
@@ -11,7 +12,9 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <DataProvider>
+        <App />
+      </DataProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
