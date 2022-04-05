@@ -16,7 +16,11 @@ export const Login = () => {
         const { name,value } = e.target;
         const currentCredentials = { ...credentials , [name]:value }
         setCredentials(currentCredentials);
-    } 
+    }
+    
+    const testLogin = () => {
+        setCredentials({email: "adarshbalika@gmail.com",password: "Adarshbalika@123"});
+    }
     
     const Login = async (e) => {
     e.preventDefault();
@@ -70,6 +74,10 @@ export const Login = () => {
                         <button type='submit' className='btn btn-calm d-flex jc-c w-100 f-w-600 bdr-rad-md'>Login</button>  
                         </div>
                         </form>
+                        <div className='d-flex px-lg'>
+                        <button onClick={() => testLogin()} className='btn btn-eco d-flex jc-c w-100 f-w-600 bdr-rad-md'>Enter Test Credentials</button>  
+                        </div>
+
                         <div className='px-lg f-w-500'>Don't have an Account ? <Link to='/signup'><span className='txt-calm f-w-800'>Signup Here</span></Link></div>   
                     </div>
               

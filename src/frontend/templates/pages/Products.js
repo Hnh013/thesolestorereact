@@ -28,7 +28,7 @@ export const Products = () => {
                     <span className='material-icons txt-smoke'>add</span>
                 </button>
                 <div className="px-xs py-xs d-flex jc-sb gap-1 fw-wrap">
-                    { filteredProducts.map( (product, index) => <Product product={product} key={index} />)}
+                    { filteredProducts.map( (product, index) => <Product fromCart={false} product={product} key={index} />)}
                 </div>
             </div> 
         </main>

@@ -16,6 +16,12 @@ const UserProvider = ({children}) => {
                 return { ...state , foundUser : action.payload };
             case 'removeItemFromWishlist':
                 return { ...state , foundUser : action.payload };
+            case 'addItemToCart':
+                return { ...state , foundUser : action.payload };
+            case 'removeItemFromCart':
+                return { ...state , foundUser : action.payload };
+            case 'updateItemInCart':
+                return { ...state , foundUser : action.payload };
             default:
                 return { ...state};
         }

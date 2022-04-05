@@ -60,28 +60,21 @@ export const Navbar = () => {
           </span>
           </Link>
           <span className="pos-rel">
-          {
-           userState.foundUser ?
-          (<Link to='/wishlist'>
+          <Link to={userState.foundUser ? '/wishlist' : '/login' }>
             <span>
               <span className="f-2x material-icons">favorite_border</span>
             </span>
-          </Link>)
-            :
-          (<Link to='/login'>
-            <span>
-              <span className="f-2x material-icons">favorite_border</span>
-            </span>
-          </Link>)
-          }
+          </Link>
             { userState.foundUser && <span className="badge badge-md num-blip-md num-blip num-blip-fire">
               { userState.foundUser.wishlist.length }
             </span> }
           </span>
           <span className="pos-rel">
+          <Link to={userState.foundUser ? '/cart' : '/login' }>
             <span>
               <span className="f-2x material-icons">shopping_cart</span>
             </span>
+          </Link>
             { userState.foundUser && <span className="badge badge-md num-blip-md num-blip num-blip-fire">
               { userState.foundUser.cart.length }
               </span> }

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./App.css";
-import { Home , Login , Signup, Products, Wishlist } from './frontend/templates/pages'; 
+import { Home , Login , Signup, Products, Wishlist, Cart } from './frontend/templates/pages'; 
 import { Navbar , Footer } from "./frontend/templates/components";
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -30,6 +30,7 @@ function App() {
                   <Route path="/signup" element={<Signup/>}/>
                   <Route path="/products" element={<Products/>}/>
                   <Route path="/wishlist" element={<Wishlist/>}/>
+                  <Route path="/cart" element={<Cart/>}/>
               </Routes>
           <Footer/>
       </BrowserRouter>
