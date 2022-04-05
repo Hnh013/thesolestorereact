@@ -17,7 +17,7 @@ export const Product = (props) => {
             payload : { ...userState.foundUser , wishlist : [ ...userState.foundUser.wishlist , {...wishlistProduct }]}   
             });
         } else {
-            toastError('Oops! Something went wrong');
+            toastError('Please Log In First!');
         }
     }
 
