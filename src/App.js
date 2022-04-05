@@ -1,10 +1,12 @@
 import React, { useState , useEffect } from 'react';
 import "./App.css";
-import { Home } from './frontend/templates/pages'; 
+import { Home , Login , Signup } from './frontend/templates/pages'; 
 import { Navbar , Footer } from "./frontend/templates/components";
 import { BrowserRouter , Routes , Route } from 'react-router-dom';
 import { getCategories } from './frontend/services/categoryService';
 import { getFeaturedProducts, getProducts } from './frontend/services/productsService';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
@@ -27,17 +29,30 @@ function App() {
   }, [categories,featuredProducts]);
 
   return (
-   <>
-      <div className="grid-container">     
-    <BrowserRouter>   
-        <Navbar/>
-            <Routes>
-                <Route path="/" element={<Home categories={categories} products={featuredProducts} />}/>
-            </Routes>
-        <Footer/>
-    </BrowserRouter>
+  <>
+    <ToastContainer
+      position="top-left"
+      autoClose={1000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
+    <div className="grid-container">     
+      <BrowserRouter>   
+          <Navbar/>
+              <Routes>
+                  <Route path="/" element={<Home categories={categories} products={featuredProducts} />}/>
+                  <Route path="/login" element={<Login/>}/>
+                  <Route path="/signup" element={<Signup/>}/>
+              </Routes>
+          <Footer/>
+      </BrowserRouter>
     </div>
-   </>
+  </>
   );
 }
 
