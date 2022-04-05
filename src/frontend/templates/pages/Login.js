@@ -18,7 +18,7 @@ export const Login = () => {
         setCredentials(currentCredentials);
     }
     
-    const testLogin = (e) => {
+    const testLogin = () => {
         setCredentials({email: "adarshbalika@gmail.com",password: "Adarshbalika@123"});
     }
     
@@ -75,7 +75,7 @@ export const Login = () => {
                         </div>
                         </form>
                         <div className='d-flex px-lg'>
-                        <button onClick={(e) => testLogin(e)} className='btn btn-eco d-flex jc-c w-100 f-w-600 bdr-rad-md'>Enter Test Credentials</button>  
+                        <button onClick={() => testLogin()} className='btn btn-eco d-flex jc-c w-100 f-w-600 bdr-rad-md'>Enter Test Credentials</button>  
                         </div>
 
                         <div className='px-lg f-w-500'>Don't have an Account ? <Link to='/signup'><span className='txt-calm f-w-800'>Signup Here</span></Link></div>   
